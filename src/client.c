@@ -132,7 +132,7 @@ void* enjoy(void* arg) {
     queue_enter(self);  // Para entrar no parque, primeiro passamos pela fila e compramos moedas
 
 #ifdef NDEBUG
-    debug("Turista [%d] está aproveitando o parque...\n", self->id);
+    debug("[INFO] - Turista [%d] está aproveitando o parque...\n", self->id);
 #endif
 
     enjoy_toys(self);  // Depois de comprar moedas, o cliente aproveita os brinquedos

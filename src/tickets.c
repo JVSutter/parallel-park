@@ -40,10 +40,6 @@ int choose_client_to_serve(void) {
 #endif
     pthread_mutex_unlock(&gate_queue_mutex);
 
-#ifdef NDEBUG
-    debug("[INFO] - Turista [%d] está aproveitando o parque...\n", client_id);
-#endif
-
     return client_id;
 }
 
