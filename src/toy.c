@@ -70,13 +70,13 @@ void* turn_on(void* args) {
         /*
         Sinaliza para os clientes que eles podem brincar e atualiza o semáforo
         toy_perform_actions com base em quantos entraram. Note que toy_perform_actions
-        recebe um post a menos, pois já foi feito um sem_wait no início da iteração.
+        recebe um wait a menos, pois já foi feito um sem_wait no início da iteração.
         */
-        for (int i = 0; i < clients_enjoying - 1; i++) {
-            sem_wait(&self->toy_perform_actions);
-            sem_post(&self->clients_wanting_to_ride);
-        }
         sem_post(&self->clients_wanting_to_ride);
+        for (int i = 0; i < clients_enjoying - 1; i++) {
+            sem_post(&self->clients_wanting_to_ride);
+            sem_wait(&self->toy_perform_actions);
+        }
     }
 
     debug("[OFF] - O brinquedo [%d] foi desligado.\n", self->id); // Altere para o id do brinquedo
