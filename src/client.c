@@ -160,14 +160,8 @@ void open_gate(client_args* args) {
 
     clients_ticket_booth_access = malloc(args->n * sizeof(sem_t));
 
-    // É possível que nenhum cliente tenha visitado o parque hoje.
-    if (args->n != 0) {
-        park_employee.toys = args->clients[0]->toys;
-        park_employee.number_toys = args->clients[0]->number_toys;
-    }
-    else {
-        debug("[INFO] - Nenhum cliente visitou o parque hoje :(\n")
-    }
+    park_employee.toys = args->clients[0]->toys;
+    park_employee.number_toys = args->clients[0]->number_toys;
 
     sem_init(&park_employee.employee_perform_action, 0, 0);
     pthread_create(&park_employee.thread, NULL, park_employee_action, &park_employee);
